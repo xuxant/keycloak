@@ -1,0 +1,18 @@
+---
+# tasks file for mysql
+- name: Install - Add mysql repository
+  yum:
+    name: '{{repo_url}}'
+    state: present
+
+- name: Install - Add python MySQL support
+  yum:
+    name: MySQL-python
+    state: present
+
+- name: Install - Install mysql with enabling repository for mysql 5.7
+  yum:
+    name: mysql-server
+    disablerepo: mysql80-community
+    enablerepo: mysql57-community
+    state: present

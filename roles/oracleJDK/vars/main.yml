@@ -1,0 +1,6 @@
+---
+# vars file for oracleJDK
+download_url: https://javadl.oracle.com/webapps/download/AutoDL?BundleId=239835_230deb18db3e4014bb8e3e8324f81b43
+download_folder: /opt
+java_name: '{{download_folder}}/jdk1.8.0_221'
+java_archive: '{{download_folder}}/jdk-8u221-linux-x64.tar.gz'

@@ -1,0 +1,35 @@
+---
+# tasks file for oracleJDK
+- name: Install - Install wget
+  package:
+    name: wget
+    state: present
+
+- name: Download - Get Oracke JDK
+  get_url:
+    url: '{{download_url}}'
+    dest: '{{java_archive}}'
+    headers:
+      Cookie: oraclelicense=accept-securebackup-cookie
+
+- name: Configure - Extract the JDK
+  unarchive:
+    src: '{{java_archive}}'
+    dest: '{{download_folder}}'
+    remote_src: yes
+
+- name: Configure - Fix the ownership of the JDK files
+  file:
+    state: directory
+    path: '{{download_folder}}'
+    owner: root
+    group: root
+    recurse: yes
+
+- name: Configure - Make Java Avaliable for the system
+  command: 'alternatives --install "/usr/bin/java" "java" "{{java_name}}/bin/java" 2000'
+
+- name: CleanUP - Remove tar file
+  file:
+    state: absent
+    path: '{{java_archive}}'

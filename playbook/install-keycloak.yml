@@ -1,0 +1,14 @@
+---
+- hosts: keycloak
+  become: true
+  vars_prompt:
+    - name: 'ansible_become_pass'
+      prompt: 'Please Enter Sudo Password'
+      private: yes
+
+  roles:
+    # - role: oracleJDK
+    #   state: present
+
+    - role: mysql
+      state: present
